@@ -21,9 +21,7 @@ import org.slf4j.LoggerFactory;
  * This class will create an hibernate {@link Configuration} with the given
  * dialect and will scan provided package for {@link MappedSuperclass} and
  * {@link Entity}. You can then use the export methods to generate your schema
- * DDL.
- *
- * @author Geoffroy Warin (https://github.com/geowarin)
+ * DDL. Taken from @author Geoffroy Warin (https://github.com/geowarin)
  *
  */
 public class HibernateExporter {
@@ -59,7 +57,7 @@ public class HibernateExporter {
 		return null;
 	}
 
-	public String[] getCreateScript() {
+	public String[] exportCreateScript() {
 		Dialect hibDialect = Dialect.getDialect(hibernateConfiguration.getProperties());
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 		try (PrintWriter writer = new PrintWriter(byteArrayOutputStream)) {
@@ -73,7 +71,7 @@ public class HibernateExporter {
 		return null;
 	}
 
-	public String[] getDropScript() {
+	public String[] exportDropScript() {
 		Dialect hibDialect = Dialect.getDialect(hibernateConfiguration.getProperties());
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 		try (PrintWriter writer = new PrintWriter(byteArrayOutputStream)) {
@@ -94,11 +92,11 @@ public class HibernateExporter {
 		final Reflections reflections = new Reflections(entityPackage);
 		for (Class<?> cl : reflections.getTypesAnnotatedWith(MappedSuperclass.class)) {
 			hibernateConfiguration.addAnnotatedClass(cl);
-			logger.info("Mapped = " + cl.getName());
+			logger.debug("Mapped = " + cl.getName());
 		}
 		for (Class<?> cl : reflections.getTypesAnnotatedWith(Entity.class)) {
 			hibernateConfiguration.addAnnotatedClass(cl);
-			logger.info("Mapped = " + cl.getName());
+			logger.debug("Mapped = " + cl.getName());
 		}
 		hibernateConfiguration.setProperty(AvailableSettings.DIALECT, dialect);
 		hibernateConfiguration.setProperties(DbUtils.additionalHibernateProperties());

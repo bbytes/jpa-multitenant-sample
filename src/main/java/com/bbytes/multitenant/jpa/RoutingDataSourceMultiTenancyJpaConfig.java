@@ -1,4 +1,4 @@
-package com.bbytes.config.jpa.multitenant.dsrouting;
+package com.bbytes.multitenant.jpa;
 
 import javax.sql.DataSource;
 
@@ -17,13 +17,13 @@ import com.bbytes.utils.DbUtils;
 /**
  * This multi tenant is using spring AbstractRoutingDataSource strategy and not
  * hibernate inbuilt multi tenant feature. Here database and connection pooling
- * per tenant is created. The db is init for the first time . We have to create
- * a default db to maitian tenant info ..it should be called tenant management
- * db. That db should be directly connected using jdbc template and not thru
- * hibernate as hibernate repostory has all the tables and is multi tenant by
+ * per tenant is created. The db init called for the first time . We have to create
+ * a default db to maintain tenant info ..it should be called tenant management
+ * db, that db should be directly connected using jdbc template and not thru
+ * hibernate as hibernate repository has all the tables and is multi tenant by
  * default
  * 
- * @author admin
+ * @author Thanneer
  *
  */
 @Configuration

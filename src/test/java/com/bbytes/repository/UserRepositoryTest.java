@@ -13,10 +13,10 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.bbytes.JpaMultitenantApplication;
-import com.bbytes.config.jpa.multitenant.dsrouting.TenantContextHolder;
 import com.bbytes.domain.Organization;
 import com.bbytes.domain.User;
 import com.bbytes.domain.UserRole;
+import com.bbytes.multitenant.jpa.TenantContextHolder;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = { JpaMultitenantApplication.class })

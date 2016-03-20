@@ -1,4 +1,4 @@
-package com.bbytes.config.jpa.multitenant.dsrouting;
+package com.bbytes.multitenant.jpa;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -38,6 +38,7 @@ public class TenantRoutingDataSource extends AbstractRoutingDataSource {
 	@Value("${flyway.migration.file.location.tenant}")
 	private String flywayScriptTenantDb;
 
+	// testing purpose the tenant name list hardcoded, needs to come from db tenant management 
 	@Value("${tenant.list.init}")
 	private String initTenantList;
 
@@ -54,19 +55,13 @@ public class TenantRoutingDataSource extends AbstractRoutingDataSource {
 		return TenantContextHolder.getTenantName();
 	}
 
-	// public void setTargetDataSources(Map<Object, Object> targetDataSources) {
-	// // do nothing
-	// }
-	//
-	// public void setDefaultTargetDataSource(Object defaultTargetDataSource) {
-	// // do nothing
-	// }
-
+	/**
+	 * Init all the tenant database , conn pool and run init sql 
+	 */
 	@Override
 	public void afterPropertiesSet() {
 
 		this.resolvedDataSources = new HashMap<Object, DataSource>();
-		// testing purpose
 		tenants = Arrays.asList(initTenantList.split("\\s*,\\s*"));
 
 		try {

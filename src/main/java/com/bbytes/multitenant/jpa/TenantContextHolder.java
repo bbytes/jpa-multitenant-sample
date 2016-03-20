@@ -1,4 +1,4 @@
-package com.bbytes.config.jpa.multitenant.dsrouting;
+package com.bbytes.multitenant.jpa;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
